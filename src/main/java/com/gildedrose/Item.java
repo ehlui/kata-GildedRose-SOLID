@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class Item {
+public class Item implements RelevantNames {
 
     public String name;
 
@@ -12,6 +12,62 @@ public class Item {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+    }
+
+    public void updateQuality() {
+        // Todo: Bring the logic to update the quality into the very same class
+        // This is slightly bad because we are tightly couple to the logic but
+        // using all the needed logic into the same origin (name + quality + sellin)
+        // This way we can simplify how our client use this class.
+
+        switch (this.name) {
+            case NAME_AGED_BRIE:
+
+                if (this.quality < 50) {
+                    this.quality += 1;
+                }
+
+                this.sellIn = this.sellIn - 1;
+
+                if (this.sellIn < 0 && this.quality < 50)
+                    this.quality += 1;
+
+                break;
+            case NAME_BACKSTAGE_PASSES:
+                if (this.quality < 50) {
+                    this.quality += 1;
+                }
+
+                if (this.sellIn < 11 && this.quality < 50) {
+                    this.quality += 1;
+                }
+                if (this.sellIn < 6 && this.quality < 50) {
+                    this.quality += 1;
+                }
+
+                this.sellIn = this.sellIn - 1;
+
+                if (this.sellIn < 0) {
+                    this.quality -= this.quality;
+                }
+
+                break;
+            case NAME_SULFURAS:
+
+                // do nothing :(
+                break;
+            default:
+                if (this.quality > 0) {
+                    this.quality -= 1;
+                }
+
+                this.sellIn -= 1;
+
+                if (this.sellIn < 0 && this.quality > 0) {
+                    this.quality -= 1;
+                }
+                break;
+        }
     }
 
     @Override
