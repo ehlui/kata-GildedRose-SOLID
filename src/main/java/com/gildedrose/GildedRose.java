@@ -9,9 +9,11 @@ class GildedRose {
 
    // NOTE: The Quality of an item is never more than 50
    private final int MAX_QUALITY = 50;
+   private final int MIN_QUALITY = 0;
+   private final int MIN_SELL_IN = 0;
+
 
    // Once the sell by date has passed, Quality degrades twice as fast (edible items, e.g. age_brie)
-   private static final int EDIBLE_HAS_DOUBLE_QUALITY_DECREMENT_SELL_IN_THRESHOLD = 0;
 
 
    private static final int DEFAULT_DECREMENT_SELL_IN_THRESHOLD = 0;
@@ -40,11 +42,10 @@ class GildedRose {
                updateAgedBrieItemQuality(item);
                break;
             case BACKSTAGE_PASSES_TAFKAL80ETC_CONCERT:
-               decreaseSellIn(item);
+               //decreaseSellIn(item);
                updateBackstageItemQuality(item);
                break;
             case SULFURAS:
-
                break;
             default:
                decreaseSellIn(item);
@@ -56,27 +57,25 @@ class GildedRose {
 
 
    public void updateOtherItemQuality(Item item) {
-      if (item.quality < DEFAULT_DECREMENT_SELL_IN_THRESHOLD) {
+      if (item.quality > DEFAULT_DECREMENT_SELL_IN_THRESHOLD) {
          decreaseQuality(item);
       }
-      decreaseQuality(item);
+      if (item.sellIn < MIN_SELL_IN && item.quality > MIN_QUALITY) {
+         decreaseQuality(item);
+      }
    }
 
    public void updateAgedBrieItemQuality(Item item) {
-
-      increaseQuality(item);
-
       if (item.quality < MAX_QUALITY) {
          increaseQuality(item);
       }
+
+      if (item.sellIn < MIN_SELL_IN && item.quality < MAX_QUALITY)
+         item.quality += 1;
    }
 
    public void updateBackstageItemQuality(Item item) {
       increaseQuality(item);
-
-      if (item.quality < MAX_QUALITY) {
-         increaseQuality(item);
-      }
 
       if (item.sellIn <= BACKSTAGE_PASSES_INCREASE_QUALITY_BY_TWO_THRESHOLD) {
          increaseQuality(item);
@@ -86,10 +85,11 @@ class GildedRose {
          increaseQuality(item);
       }
 
-      if (item.sellIn < BACKSTAGE_PASSES_QUALITY_RESET_SELL_IN_THRESHOLD) {
-         item.quality = 0;
-      }
+      decreaseSellIn(item);
 
+      if (item.sellIn < BACKSTAGE_PASSES_QUALITY_RESET_SELL_IN_THRESHOLD) {
+         item.quality -= item.quality;
+      }
    }
 
    public void updateSulfurasItemQuality(Item item) {
@@ -107,7 +107,7 @@ class GildedRose {
    }
 
    private void decreaseQuality(Item item) {
-      if (item.quality > 0) {
+      if (item.quality > MIN_QUALITY) {
          item.quality -= 1;
       }
    }
