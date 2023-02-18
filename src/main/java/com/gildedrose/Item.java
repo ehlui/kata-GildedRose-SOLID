@@ -14,12 +14,11 @@ public class Item implements RelevantNames {
         this.quality = quality;
     }
 
-    public void updateQuality() {
-        // Todo: Bring the logic to update the quality into the very same class
-        // This is slightly bad because we are tightly couple to the logic but
-        // using all the needed logic into the same origin (name + quality + sellin)
-        // This way we can simplify how our client use this class.
 
+    private final int MAX_QUALITY_VALUE = 50;
+
+
+    public void updateQuality() {
         switch (this.name) {
             case NAME_AGED_BRIE:
 
@@ -31,8 +30,8 @@ public class Item implements RelevantNames {
 
                 if (this.sellIn < 0 && this.quality < 50)
                     this.quality += 1;
-
                 break;
+
             case NAME_BACKSTAGE_PASSES:
                 if (this.quality < 50) {
                     this.quality += 1;
@@ -50,10 +49,9 @@ public class Item implements RelevantNames {
                 if (this.sellIn < 0) {
                     this.quality -= this.quality;
                 }
-
                 break;
-            case NAME_SULFURAS:
 
+            case NAME_SULFURAS:
                 // do nothing :(
                 break;
             default:
