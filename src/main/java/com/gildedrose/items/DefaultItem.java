@@ -9,13 +9,13 @@ public class DefaultItem extends Item {
 
    @Override
    public void update() {
-      decreaseSellIn(this);
+      decreaseSellIn();
 
       if (this.quality > DEFAULT_DECREMENT_SELL_IN_THRESHOLD) {
-         decreaseQuality(this);
+         decreaseQuality();
       }
       if (this.sellIn < MIN_SELL_IN && this.quality > MIN_QUALITY) {
-         decreaseQuality(this);
+         decreaseQuality();
       }
    }
 }

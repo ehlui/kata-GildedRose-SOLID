@@ -27,19 +27,19 @@ public abstract class Item {
 
    public abstract void update();
 
-   protected void decreaseSellIn(Item item) {
-      item.sellIn -= 1;
+   protected void decreaseSellIn() {
+      this.sellIn -= 1;
    }
 
-   protected void increaseQuality(Item item) {
-      if (item.quality < MAX_QUALITY) {
-         item.quality += 1;
+   protected void increaseQuality() {
+      if (this.quality < MAX_QUALITY) {
+         this.quality += 1;
       }
    }
 
-   protected void decreaseQuality(Item item) {
-      if (item.quality > MIN_QUALITY) {
-         item.quality -= 1;
+   protected void decreaseQuality() {
+      if (this.quality > MIN_QUALITY) {
+         this.quality -= 1;
       }
    }
 }

@@ -7,10 +7,10 @@ public class AgedBrie extends Item {
 
    @Override
    public void update() {
-      decreaseSellIn(this);
+      decreaseSellIn();
 
       if (this.quality < MAX_QUALITY) {
-         increaseQuality(this);
+         increaseQuality();
       }
 
       if (this.sellIn < MIN_SELL_IN && this.quality < MAX_QUALITY) {

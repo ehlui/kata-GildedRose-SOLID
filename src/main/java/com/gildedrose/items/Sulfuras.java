@@ -7,6 +7,6 @@ public class Sulfuras extends Item {
 
    @Override
    public void update() {
-     // do nothing
+      // do nothing
    }
 }

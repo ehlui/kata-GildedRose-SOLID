@@ -14,17 +14,17 @@ public class Backstage extends Item {
 
    @Override
    public void update() {
-      increaseQuality(this);
+      increaseQuality();
 
       if (this.sellIn <= BACKSTAGE_PASSES_INCREASE_QUALITY_BY_TWO_THRESHOLD) {
-         increaseQuality(this);
+         increaseQuality();
       }
 
       if (this.sellIn <= BACKSTAGE_PASSES_INCREASE_QUALITY_BY_THREE_THRESHOLD) {
-         increaseQuality(this);
+         increaseQuality();
       }
 
-      decreaseSellIn(this);
+      decreaseSellIn();
 
       if (this.sellIn < BACKSTAGE_PASSES_QUALITY_RESET_SELL_IN_THRESHOLD) {
          this.quality -= this.quality;
