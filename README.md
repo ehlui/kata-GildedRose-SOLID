@@ -29,3 +29,10 @@ how well we can test our code?
 2. **mutation tests** (change code after tests to check if fails which means they are ok before a refactoring)
     - We create a "mutation" on a specific line of code to check if we break our test
     - We create a "mutation" on a specific line of code to check if we break our test
+
+### Branches
+- There are two groups
+  - **0X-...** 
+  - **refactor-X_...**
+  
+We are using different approaches and decision on each group of branches
