@@ -4,6 +4,9 @@ import com.gildedrose.items.*;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 
 class GildedRoseTest {
 
@@ -22,13 +25,14 @@ class GildedRoseTest {
    }
 
    private String doUpdateQuality(String name, int sellIn, int quality) {
-      Item[] items = new Item[]{itemFactory(name, sellIn, quality)};
+      List<Item> items = Collections.singletonList(itemFactory(name, sellIn, quality));
+
       GildedRose app = new GildedRose();
       app.updateQuality(items);
       //assertEquals("foo", app.items[0].name);
 
       // Comparing from the txt
-      return items[0].toString();
+      return items.get(0).toString();
    }
 
    private Item itemFactory(final String name, final int sellIn, final int quality) {
