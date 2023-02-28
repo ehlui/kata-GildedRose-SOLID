@@ -16,7 +16,7 @@ For e.g. 10 days:
 
 ---
 
-## Luis comments
+## Comments
 
 - This is a repo extracted from [Emily Bache github](https://github.com/emilybache/GildedRose-Refactoring-Kata)
   which I will be using for practising refactoring with Java and testing.
